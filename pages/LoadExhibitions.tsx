@@ -18,12 +18,21 @@ const LoadExhibitions = ({ data }) => {
     setNextPageURL(res.data.pagination.next_url)
   }
 
-  const showImage = (imageURL, id) => {
-    if (imageURL == null || imageURL == undefined) {
-      return <Image src={sample} alt='Art Work' width={300} height={250} />
-    }
+  const showExhibitionDetails = id => {
+    Router.push(`/${id}`)
+  }
 
-    return <Image src={imageURL} alt='Art Work' width={300} height={250} />
+  const showImage = (imageURL, id) => {
+    let url = ([null, undefined]).includes(imageURL) ? sample : imageURL
+
+    return <Image src={url} alt='Art Work' width={300} height={250} onClick={() => showExhibitionDetails(id)} />
+  }
+
+  interface fetchExhibition {
+    id: String,
+    image_url: String,
+    aic_start_at: String,
+    aic_end_at: String,
   }
 
   return (
@@ -42,7 +51,7 @@ const LoadExhibitions = ({ data }) => {
         className={{ display: 'flex' }}
         style={{ paddingTop: 100, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly' }}
       >
-        {exhibitions.map(item => (
+        {exhibitions.map((item: fetchExhibition) => (
           <div key={item.id} style={{ padding: 5, width: 300, marginBottom: 10 }}>
             {showImage(item.image_url, item.id)}
             <p style={{ minHeight: 50, marginBottom: 0 }}> {item.title} </p>
