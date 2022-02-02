@@ -7,6 +7,7 @@ import sample from '../assets/images/sample.jpeg'
 import Moment from 'react-moment'
 import Skeleton from 'react-loading-skeleton'
 import styles from '../styles/main.module.css'
+import { AppURL } from '../constants/path.tsx'
 
 const ExhibitionShowPage: NextPage = () => {
   const [exhibition, setExhibition] = useState([])
@@ -19,7 +20,7 @@ const ExhibitionShowPage: NextPage = () => {
   useEffect(async () => {
     setLoading(true)
     let eid = window.location.pathname.split('/')[1]
-    const res = await axios.get(`https://api.artic.edu/api/v1/exhibitions/${eid}`)
+    let res = await axios.get(`${AppURL}${eid}`)
 
     setExhibition(res.data.data)
     setLoading(false)
