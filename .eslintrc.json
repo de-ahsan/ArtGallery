@@ -1,3 +1,26 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "next",
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 100,
+        "tabWidth": 2,
+        "useTabs": false,
+        "semi": false,
+        "singleQuote": true,
+        "trailingComma": "none",
+        "quoteProps": "as-needed",
+        "bracketSpacing": true,
+        "arrowParens": "avoid",
+        "no-duplicate-variable": [true, "check-parameters"],
+        "no-var-keyword": true,
+        "endOfLine": "lf"
+      }
+    ]
+  }
 }
