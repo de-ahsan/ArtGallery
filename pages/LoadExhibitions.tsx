@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Moment from 'react-moment'
 import sample from '../assets/images/sample.jpeg'
 import Router from 'next/router'
+import styles from '../styles/main.module.css'
 
 const LoadExhibitions = ({ data }) => {
   const [exhibitions, setExhibitions] = useState(data.data)
@@ -37,8 +38,8 @@ const LoadExhibitions = ({ data }) => {
 
   return (
     <>
-      <div style={{ background: '#676767', position: 'absolute', top: 0, width: '100%', height: 90 }}>
-        <span style={{ color: 'white', paddingLeft: 15, paddingTop: 20, position: 'absolute', fontSize: 35, fontWeight: 'normal' }}>
+      <div className={styles.header}>
+        <span className={styles.heading}>
           Exhibitions!
         </span>
       </div>
@@ -46,19 +47,19 @@ const LoadExhibitions = ({ data }) => {
         dataLength={exhibitions.length}
         next={getMoreExhibitions}
         hasMore={hasMore}
-        loader={<h3 style={{ display: 'block', width: '100%', textAlign: 'center', fontSize: 30, fontWeight: 300, fontStyle: 'italic' }}> Loading more exhibitions...</h3>}
+        loader={<h3 className={styles.loader}> Loading more exhibitions...</h3>}
         endMessage={<h4>Nothing more to show</h4>}
-        className={{ display: 'flex' }}
-        style={{ paddingTop: 100, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly' }}
+        className={`${styles.flex} ${styles.scroller}`}
+
       >
         {exhibitions.map((item: fetchExhibition) => (
-          <div key={item.id} style={{ padding: 5, width: 300, marginBottom: 10 }}>
+          <div key={item.id} className={styles.item}>
             {showImage(item.image_url, item.id)}
-            <p style={{ minHeight: 50, marginBottom: 0 }}> {item.title} </p>
+            <p className={styles.title}> {item.title} </p>
             <span>
-              <Moment format='DD-MM-YYYY' style={{ paddingRight: 5, fontStyle: 'italic' }}>{item.aic_start_at}</Moment>
+              <Moment format='DD-MM-YYYY' className={`${styles.pr5} ${styles.italic}`}>{item.aic_start_at}</Moment>
                 -
-              <Moment format='DD-MM-YYYY' style={{ paddingLeft: 5, fontStyle: 'italic' }}>{item.aic_end_at}</Moment>
+              <Moment format='DD-MM-YYYY' className={`${styles.pl5} ${styles.italic}`}>{item.aic_end_at}</Moment>
             </span>
           </div>
         ))}

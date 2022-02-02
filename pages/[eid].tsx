@@ -6,6 +6,7 @@ import axios from 'axios'
 import sample from '../assets/images/sample.jpeg'
 import Moment from 'react-moment'
 import Skeleton from 'react-loading-skeleton'
+import styles from '../styles/main.module.css'
 
 const ExhibitionShowPage: NextPage = () => {
   const [exhibition, setExhibition] = useState([])
@@ -34,29 +35,29 @@ const ExhibitionShowPage: NextPage = () => {
 
   return (
     <>
-      <div style={{ paddingBottom: 30, background: '#676767', position: 'absolute', top: 0, width: '100%', height: 80 }}>
-        <span style={{ color: 'white', paddingLeft: 15, paddingTop: 20, position: 'absolute', fontSize: 35, fontWeight: 'normal' }}>
+      <div className={styles.header}>
+        <span className={styles.heading}>
           Exhibitions!
         </span>
       </div>
-      <div style={{ paddingTop: 100, paddingLeft: 10 }}>
-        <button onClick={() => Router.back()} style={{ 'cursor': 'pointer' }}>Back</button>
+      <div className={`${styles.pt100} ${styles.pl10}`}>
+        <button onClick={() => Router.back()} className={styles.pointer}>Back</button>
         {!loading ? (
           <div>
-            <div style={{ display: 'flex' }}>
+            <div className={styles.flex}>
               <p>{exhibition.title}</p>
-              <span style={{ paddingTop: 25, paddingLeft: 5, fontSize: 12 }}>
-                <Moment format='DD-MM-YYYY' style={{ paddingRight: 5, fontStyle: 'italic' }}>{exhibition.aic_start_at}</Moment>
+              <span className={styles.duration}>
+                <Moment format='DD-MM-YYYY' className={`${styles.pr5} ${styles.italic}`}>{exhibition.aic_start_at}</Moment>
                   -
-                <Moment format='DD-MM-YYYY' style={{ paddingLeft: 5, fontStyle: 'italic' }}>{exhibition.aic_end_at}</Moment>
+                <Moment format='DD-MM-YYYY' className={`${styles.pl5} ${styles.italic}`}>{exhibition.aic_end_at}</Moment>
               </span>
             </div>
-            <div style={{ display: 'flex' }}>
-              <div style={{ minHeight: 300, minWidth: 250 }}>
+            <div className={styles.flex}>
+              <div className={styles.image}>
                 {showImage()}
               </div>
               <div>
-                <p style={{ marginTop: 0, paddingLeft: 10, fontSize: 15 }}> {exhibition.description} </p>
+                <p className={styles.description}> {exhibition.description} </p>
               </div>
             </div>
           </div>
